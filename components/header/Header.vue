@@ -1,43 +1,52 @@
 <template>
-  <v-row 
-    no-gutters
-    class="background"
-    justify="center"
-    align="center"
-  >
-    <v-col 
-      :cols="isPhone ? 8 : 4" 
-      class="slant"
+  <div style="position: relative;">
+    <v-row 
+      no-gutters
+      class="background"
+      justify="center"
+      align="center"
     >
-      <div
-        class="mx-auto"
-        v-bind:class="{
-          'image-size-pc': !isPhone,
-          'image-size-mp': isPhone,
-        }"
+      <v-col 
+        :cols="isPhone ? 8 : 4" 
+        class="slant"
       >
-        <dreamer />
-      </div>
-      <div 
-        class="name text-center cursive-text font-weight-bold"
-        v-bind:class="{
-          'name-size-pc': !isPhone,
-          'name-size-mp': isPhone,
-        }"
-      >
-        Vince Millora
-      </div>
-
-    </v-col>
-  </v-row>
+        <div
+          class="mx-auto"
+          v-bind:class="{
+            'image-size-pc': !isPhone,
+            'image-size-mp': isPhone,
+          }"
+        >
+          <dreamer />
+        </div>
+        <div 
+          class="name text-center cursive-text font-weight-bold"
+          v-bind:class="{
+            'name-size-pc': !isPhone,
+            'name-size-mp': isPhone,
+          }"
+        >
+          Vince Millora
+        </div>
+      </v-col>
+    </v-row>
+    <div 
+      style="position: absolute; bottom: 25px; left: 50%; transform: translate(-50%, -50%);"
+      class="white--text"
+    >
+      <section-footer :is_dark="true" />
+    </div>
+  </div>
 </template>
 
 <script>
   import dreamer from '~/static/images/dreamer.svg'
+  import SectionFooter from '~/components/misc/SectionFooter.vue'
 
   export default {
     components: {
       dreamer,
+      SectionFooter
     },
     computed: {
       isPhone() {
@@ -51,7 +60,7 @@
   }
 </script>
 
-<style css-scoped>
+<style scoped>
   .background {
     height: 100vh;
     background: #2e2f41;

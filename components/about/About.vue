@@ -5,12 +5,14 @@
   >
     <v-col 
       :cols="isPhone ? 12 : 6"
-      v-bind:class="{'title-sticky': !isPhone}">
+      v-bind:class="{'title-sticky': !isPhone}"
+    >
       <v-row 
         no-gutters
         justify="center"
         align="center"
         class="background-left"
+        style="positon: relative"
       >
         <div 
           class="white--text cursive-text font-weight-bold title-text slant"
@@ -21,11 +23,21 @@
         >
           About
         </div>
+        <div 
+          style="position: absolute; bottom: 25px"
+          class="white--text"
+        >
+          <section-footer :is_dark="true" />
+        </div>
       </v-row>
     </v-col>
     <v-col 
       :cols="isPhone ? 12 : 6" 
-      class="pa-16"
+      class="white-bg"
+      v-bind:class="{
+        'pa-16':!isPhone,
+        'pa-8': isPhone
+      }"
     >
       <span> 
         Hi there, my name is Vince Carreon Millora, a guy from the Philippines. I am a software developer that enjoys coding
@@ -47,7 +59,12 @@
 </template>
 
 <script>
+  import SectionFooter from '~/components/misc/SectionFooter.vue'
+
   export default {
+    components: {
+      SectionFooter
+    },
     computed: {
       isPhone() {
         if(this.$vuetify.breakpoint.name === "sm" || this.$vuetify.breakpoint.name === "xs") {
@@ -65,7 +82,7 @@
   }
 </script>
 
-<style css-scoped>
+<style scoped>
   .background-left {
     height: 100vh;
     background-color: #c0375f;

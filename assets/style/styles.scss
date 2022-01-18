@@ -24,6 +24,14 @@
   transform: rotate(-5deg) skew(-5deg);
 }
 
+.white-bg {
+  background-color: white
+}
+
+.transition-effect {
+  transition: all .75s linear;
+}
+
 .title-sticky {
   position: -webkit-sticky;
   position: sticky;

@@ -1,33 +1,95 @@
 <template>
-  <div class="parent">
-    
-    <div class="content text-center">
-      <div class="white--text content-text content-text-title">miel agency</div>
-      <div class="white--text content-text content-text-subtitle">influencer marketing</div>
-      <div class="hidden-button slant cursive-text mt-5">see more</div>
+  <div 
+    class="white-bg"
+    v-bind:class="{
+      'parent-border': is_show_details && !isPhone,
+    }"
+  >
+    <div 
+      class="parent"
+      v-bind:class="{'clickable': !is_show_details}"
+      @click="showDetails()"
+    >
+      <div class="child">
+        <v-img 
+          :height="is_show_details ? '75vh' : '100vh'"
+          width="100%"
+          src="/images/work/mielAgency.jpg"
+          eager
+          class="transition-effect"
+        >
+          <div class="content text-center">
+            <div class="white--text content-text content-text-title">miel agency</div>
+            <div class="white--text content-text content-text-subtitle">influencer marketing</div>
+            <div v-if="!is_show_details" class="hidden-button slant cursive-text mt-5">see more</div>
+          </div>
+        </v-img>
+      </div>
     </div>
-    <div class="child">
-      
+    <div v-if="is_show_details" class="transition-effect white-bg">
+      <div v-bind:class="{
+          'pa-16':!isPhone,
+          'pa-8': isPhone
+        }"
+      >
+        <span>
+        An Instagrammer network platform where customers can search and select influencers that can advertise their product. <strong>miel agency</strong> offer various advertising options such as sampling, feed/story posting, performance-based advertising, and ambassador advertising. 
+        <br /><br />
+        After influencers advertised the product, <strong>miel agency</strong> will gather performance data such as likes, comments, views, reach, and insights about the feed/story posts. Customers then can see these data reports real-time through the campaign management screen. 
+        </span>
+      </div>
+      <div class="pa-16 text-center">
+        <v-btn
+          fab
+          dark
+          color="#3e3d57"
+          @click="nextSection()"
+        >
+          <v-icon color="#c0375f">mdi-arrow-right-thick</v-icon>
+        </v-btn>
+      </div>
     </div>
   </div >
 </template>
 
-<style css-scoped>
+<script>
+  export default {
+    props: ['is_show_details'],
+    computed: {
+      isPhone() {
+        if(this.$vuetify.breakpoint.name === "sm" || this.$vuetify.breakpoint.name === "xs") {
+          return true
+        } else {
+          return false
+        }
+      },
+    },
+    methods: {
+      nextSection() {
+        this.$emit('next', 'mielAI')
+      },
+      showDetails() {
+        if(!this.is_show_details) {
+          this.$emit('expand')
+        }
+      }
+    }
+  }
+</script>
 
-
+<style scoped>
   .parent {
     position: relative;
     width: 100%; 
-    height: 100vh;
     overflow: hidden;
-    background-color: pink; /* fallback color */
+  }
+  .parent-border {
+    border-left: 1px solid rgb(226, 226, 226);
   }
 
   .child {
     width: 100%;
     height: 100%;
-    background-color: black; /* fallback color */
-    background-image: url("/images/work/mielAgency.jpg");
     background-position: center;
     background-size: cover;
     transition: all 20s;
@@ -51,8 +113,11 @@
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
   }
-
   
+  .clickable {
+    cursor: pointer;
+  }
+
   @property --offset {
     syntax: '<length>';
     inherits: false;
